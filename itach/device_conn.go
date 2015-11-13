@@ -51,8 +51,7 @@ func (conn *DeviceConn) SendCommand(cmd string) (resp string, err error) {
   }
 
   if strings.HasPrefix(resp, "ERR_") {
-    resp = strings.TrimPrefix(resp, "ERR_")
-    code, err := strconv.ParseInt(resp, 0, 0)
+    code, err := strconv.ParseInt(resp[len(resp)-2:], 0, 0)
     if err != nil {
       return "", err
     }
